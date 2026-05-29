@@ -3,7 +3,7 @@ import DashboardLayout from "../Components/Layouts/DashboardLayout";
 import SummarCards from "../Components/DashBoard/SummarCards";
 import ExpenseChart from "../Components/DashBoard/ExpenseChart";
 import RecentTransactions from "../Components/DashBoard/RecentTransctions";
-import AIPreviewCard from "../Components/DashBoard/AIPreviewCard";
+import AIPreviewCard from "../Components/DashBoard/AiPreviewCard";
 import axiosInstance from "../api/axiosInstance";
 import { useEffect } from "react";
 import { useState } from "react";
