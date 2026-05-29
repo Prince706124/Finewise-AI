@@ -14,6 +14,13 @@ import budgetRoutes from "./Routes/budgetRoutes.js";
 import aiRoutes from "./Routes/aiRoutes.js";
 import settingsRoutes from "./Routes/settingsRoutes.js";
 
+console.log("===== SERVER STARTING =====");
+
+console.log("PORT:", process.env.PORT);
+console.log("MONGO_URL exists:", !!process.env.MONGO_URL);
+console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+console.log("GEMINI_API_KEY exists:", !!process.env.GEMINI_API_KEY);
+
 dotenv.config();
 
 const app = express();
