@@ -31,6 +31,7 @@ try {
   console.error("Database connection failed:");
   console.error(error);
 }
+console.log("Database connection attempted");
 app.use(
   cors({
     origin: true,
