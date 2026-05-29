@@ -87,9 +87,9 @@ Return response in EXACT format:
       contents: prompt,
     });
 
-    console.log("RAW AI RESPONSE:");
+    // console.log("RAW AI RESPONSE:");
 
-    console.log(response.text);
+    // console.log(response.text);
 
     const cleanedText = response.text
       .replace(/```json/g, "")
@@ -105,7 +105,7 @@ Return response in EXACT format:
     } catch (parseError) {
       console.log("JSON Parse Error:");
 
-      console.log(parseError);
+      // console.log(parseError);
 
       return {
         executiveSummary: cleanedText,
@@ -179,5 +179,78 @@ IMPORTANT:
     console.log(error);
 
     return "Unable to generate response right now.";
+  }
+};
+export const generateReportInsights = async (data) => {
+  try {
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
+
+    const prompt = `
+
+You are a professional financial report analyst.
+
+Financial Data:
+
+Income:
+₹${data.totalIncome}
+
+Expense:
+₹${data.totalExpense}
+
+Savings:
+₹${data.savings}
+
+Savings Percentage:
+${data.savingsPercentage}%
+
+Top Category:
+${data.topCategory}
+
+Top Category Amount:
+₹${data.topCategoryAmount}
+
+Return ONLY valid JSON.
+
+{
+  "executiveSummary": "",
+
+  "highlights": [
+    ""
+  ],
+
+  "observations": [
+    {
+      "title": "",
+      "desc": ""
+    }
+  ]
+}
+
+`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+
+      contents: prompt,
+    });
+
+    const cleaned = response.text
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    return JSON.parse(cleaned);
+  } catch (error) {
+    console.log(error);
+
+    return {
+      executiveSummary: "Unable to generate AI report.",
+
+      highlights: [],
+
+      observations: [],
+    };
   }
 };

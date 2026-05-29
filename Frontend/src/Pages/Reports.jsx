@@ -9,43 +9,13 @@ import axiosInstance from "../api/axiosInstance";
 function Reports() {
   const [report, setReport] = useState(null);
 
-  // STATIC AI DATA
-  const highlights = [
-    "Food expenses increased this month",
-
-    "Entertainment budget exceeded planned target",
-
-    "Savings rate improved compared to last month",
-
-    "Housing remains highest spending category",
-  ];
-
-  const observations = [
-    {
-      title: "Highest Expense Category",
-
-      desc: "Housing remained your largest expense this month.",
-    },
-
-    {
-      title: "Improved Savings",
-
-      desc: "You maintained a strong savings percentage this month.",
-    },
-
-    {
-      title: "Budget Observation",
-
-      desc: "Entertainment spending is increasing steadily.",
-    },
-  ];
-
   // FETCH REPORT
   const fetchReport = async () => {
     try {
       const response = await axiosInstance.get("/reports/summary");
 
       setReport(response.data);
+      // console.log("Report Summary:", response.data);
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +36,29 @@ function Reports() {
 
   return (
     <DashboardLayout title={"Reports"}>
+      <div
+        className="
+bg-white
+dark:bg-[#111827]
+rounded-2xl
+border
+border-gray-100
+dark:border-gray-800
+p-6
+"
+      >
+        <h2 className="text-2xl font-semibold mb-5">AI Financial Summary</h2>
+
+        <p
+          className="
+  text-gray-600
+  dark:text-gray-300
+  leading-8
+  "
+        >
+          {report.aiReport?.executiveSummary}
+        </p>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 ">
         {/* LEFT */}
         <div className="lg:col-span-8 space-y-6">
@@ -121,7 +114,7 @@ function Reports() {
             </h2>
 
             <div className="space-y-5">
-              {observations.map((item, index) => (
+              {report.aiReport?.observations?.map((item, index) => (
                 <div
                   key={index}
                   className="border border-gray-100 dark:border-gray-800 rounded-2xl p-5"
@@ -148,7 +141,7 @@ function Reports() {
                 {report.topCategoryAmount.toLocaleString()})
               </div>
 
-              {highlights.map((item, index) => (
+              {report.aiReport?.highlights?.map((item, index) => (
                 <div
                   key={index}
                   className="bg-[#faf8ff] dark:bg-[#1f1f1f] border border-[#ece8ff] rounded-xl p-5 text-gray-700 dark:text-gray-200"
