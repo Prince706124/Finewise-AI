@@ -7,7 +7,7 @@ import { Link } from "react-router";
 function HeroSection() {
   return (
     <>
-      <section className="max-width-7xl mx-auto px-6 lg:px-10 py-16 lg:py-24 grid grid-cols-2 gap-14 items-center">
+      <section className="max-width-7xl mx-auto px-6 lg:px-10 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
         <div>
           <p className="text-sm uppercase tracking-[3px] text-[#5b3df5]">
             Smart Personal Finance Program
@@ -37,7 +37,7 @@ function HeroSection() {
             <span>✔ Monthly Reports</span>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="bg-white  rounded-2xl border border-gray-100 dark:border-gray-800 p-6 shadow-sm hover:translate-y-1 transition">
             <FaChartPie className="text-[#5b3df5] text-2xl mb-4" />
             <h3 className="font-semibold text-lg mb-2">Expense Analytics</h3>
