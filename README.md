@@ -8,10 +8,9 @@ FinWise AI is a full-stack personal finance management application that enables 
 
 ## Live Demo
 
-Frontend: `Coming Soon`
+Frontend: (https://finewise-ai.vercel.app)
 
-Backend API: `Coming Soon`
-
+Backend API: https://finewise-ai.onrender.com
 ---
 
 ## Overview
