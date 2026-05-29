@@ -32,12 +32,7 @@ try {
   console.error(error);
 }
 console.log("Database connection attempted");
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-);
+app.use(cors(["http://localhost:5173", process.env.FRONTEND_URL]));
 
 app.use(express.json());
 
