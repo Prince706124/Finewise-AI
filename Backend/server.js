@@ -18,11 +18,17 @@ dotenv.config();
 
 const app = express();
 
-connectDB();
-
+try {
+  await connectDB();
+  console.log("Database connected");
+} catch (error) {
+  console.error("Database connection failed:");
+  console.error(error);
+}
 app.use(
   cors({
     origin: "http://localhost:5173",
+    process.env.FRONTEND_URL,
     credentials: true,
   }),
 );
