@@ -24,7 +24,7 @@ function AIAdvisor() {
     try {
       const response = await axiosInstance.get("/ai/insights");
 
-      console.log("AI insights received:", response.data);
+      // console.log("AI insights received:", response.data);
 
       setAiData(response.data);
     } catch (error) {
@@ -183,7 +183,7 @@ function AIAdvisor() {
               {aiData?.recommendedBudgets?.map((item, index) => (
                 <div
                   key={index}
-                  className="border border-[#ece8ff] bg-[#faf8ff] rounded-xl p-5 text-gray-700 dark:text-gray-200 leading-7"
+                  className="border border-[#ece8ff] bg-[#faf8ff] dark:bg-[#1f1f1f] rounded-xl p-5 text-gray-700 dark:text-gray-200 leading-7"
                 >
                   {renderAIText(item)}
                 </div>

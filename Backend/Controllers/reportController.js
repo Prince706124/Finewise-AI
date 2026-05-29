@@ -1,5 +1,6 @@
 import Income from "../Models/Income.js";
 import Expense from "../Models/Expense.js";
+import { generateReportInsights } from "../Services/aiService.js";
 
 export const getReportSummary = async (req, res) => {
   try {
@@ -47,22 +48,39 @@ export const getReportSummary = async (req, res) => {
         topCategory = category;
       }
     });
+    let topCategoryAmount = 0;
+
+    Object.keys(categoryMap).forEach((category) => {
+      if (categoryMap[category] > topCategoryAmount) {
+        topCategory = category;
+
+        topCategoryAmount = categoryMap[category];
+      }
+    });
+    const aiReport = await generateReportInsights({
+      totalIncome,
+      totalExpense,
+      savings,
+      savingsPercentage,
+      topCategory,
+      topCategoryAmount,
+    });
+
+    // console.log("AI Report:", aiReport);
 
     // RESPONSE
     res.status(200).json({
       totalIncome,
-
       totalExpense,
-
       savings,
-
       savingsPercentage,
-
       topCategory,
+      topCategoryAmount,
 
-      topCategoryAmount: highestAmount,
+      aiReport,
     });
   } catch (error) {
+    console.log("Error in getReportSummary:", error);
     res.status(500).json({
       message: error.message,
     });
