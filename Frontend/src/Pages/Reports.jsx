@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import DashboardLayout from "../Components/Layouts/DashboardLayout";
 
-import AIPreviewCard from "../Components/DashBoard/AIPreviewCard";
+import AIPreviewCard from "../Components/DashBoard/AiPreviewCard";
 
 import axiosInstance from "../api/axiosInstance";
 
