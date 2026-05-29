@@ -1,6 +1,6 @@
-import Income from "../models/Income.js";
+import Income from "../MCategory.js";
 
-import Expense from "../models/Expense.js";
+import Expense from "../Models/Expense.js";
 
 import Budget from "../Models/Budgets.js";
 

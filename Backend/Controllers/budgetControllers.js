@@ -1,6 +1,6 @@
 import Budget from "../Models/Budgets.js";
 
-import Expense from "../models/Expense.js";
+import Expense from "../Models/Expense.js";
 
 // CREATE BUDGET
 export const addBudget = async (req, res) => {

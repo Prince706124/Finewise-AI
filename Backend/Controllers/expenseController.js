@@ -1,4 +1,4 @@
-import Expense from "../models/Expense.js";
+import Expense from "../Models/Expense.js";
 
 // ADD EXPENSE
 export const addExpense = async (req, res) => {
