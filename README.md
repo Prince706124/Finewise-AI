@@ -14,6 +14,20 @@ An AI-powered Personal Finance Management Platform built using the MERN Stack (M
 * Password Change Functionality
 * Secure API Access
 
+## 📸 Screenshots
+
+
+* Login Page- <img src="./screenshots/LoginPage.png"/>
+* Dashboard -<img src="./screenshots/Dashboard.png"/>
+* Income Management-<img src="./screenshots/Income.png"/>
+* Expense Management-<img src="./screenshots/Expnese.png"/>
+* Budgets-<img src="./screenshots/Budgets.png"/>
+* Reports-<img src="./screenshots/Reports.png"/>
+* AI Advisor-<img src="./screenshots/AIAdvisor.png"/>
+* AI Chat-<img src="./screenshots/AIchat.png"/>
+* Settings Page-<img src="./screenshots/Settings.png"/>
+
+
 ### 📊 Dashboard Analytics
 
 * Total Income Overview
@@ -232,20 +246,6 @@ VITE_API_URL=
 ```
 
 ---
-
-## 📸 Screenshots
-
-Add screenshots of:
-
-* Login Page
-* Dashboard
-* Income Management
-* Expense Management
-* Budgets
-* Reports
-* AI Advisor
-* AI Chat
-* Settings Page
 
 ---
 
