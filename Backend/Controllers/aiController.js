@@ -1,4 +1,4 @@
-import Income from "../MCategory.js";
+import Income from "../Models/Income.js";
 
 import Expense from "../Models/Expense.js";
 
