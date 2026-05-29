@@ -4,7 +4,7 @@ import {
   addExpense,
   getExpenses,
   deleteExpense,
-} from "../controllers/expenseController.js";
+} from "../Controllers/expenseController.js";
 
 import protect from "../Middlewares/authMiddleware.js";
 
