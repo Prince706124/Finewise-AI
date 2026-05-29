@@ -93,7 +93,7 @@ function Register() {
                   <input
                     type="password"
                     name="confirm-password"
-                    value={formData.password}
+                    value={formData.confirmpassword}
                     onChange={handleChange}
                     placeholder="confirm Password"
                     className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none"

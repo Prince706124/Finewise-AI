@@ -313,7 +313,7 @@ function Settings() {
 
         {/* SECURITY */}
 
-        <div className="bg-white dark:bg-[#111827] border border-gray-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-[#111827] text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
           <h2 className="text-2xl font-bold mb-8">Security</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -327,7 +327,7 @@ function Settings() {
                   currentPassword: e.target.value,
                 }))
               }
-              className="w-full border border-gray-200 rounded-xl px-4 py-4 outline-none focus:border-[#5b3df5]"
+              className="w-full border border-gray-200 text-gray-500 dark:text-gray-400 rounded-xl px-4 py-4 outline-none focus:border-[#5b3df5]"
             />
 
             <input
@@ -340,7 +340,7 @@ function Settings() {
                   newPassword: e.target.value,
                 }))
               }
-              className="w-full border border-gray-200 rounded-xl px-4 py-4 outline-none focus:border-[#5b3df5]"
+              className="w-full border border-gray-200 text-gray-500 dark:text-gray-400 rounded-xl px-4 py-4 outline-none focus:border-[#5b3df5]"
             />
 
             <input
@@ -353,7 +353,7 @@ function Settings() {
                   confirmPassword: e.target.value,
                 }))
               }
-              className="w-full border border-gray-200 rounded-xl px-4 py-4 outline-none focus:border-[#5b3df5]"
+              className="w-full border border-gray-200 text-gray-500 dark:text-gray-400 rounded-xl px-4 py-4 outline-none focus:border-[#5b3df5]"
             />
           </div>
 
