@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardLayout from "../Components/Layouts/DashboardLayout";
-import AIPreviewCard from "../Components/DashBoard/AIPreviewCard";
+import AIPreviewCard from "../Components/DashBoard/AiPreviewCard";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useState } from "react";
 import { useEffect } from "react";
