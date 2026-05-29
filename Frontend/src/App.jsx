@@ -9,7 +9,7 @@ import Income from "./Pages/Income";
 import Expense from "./Pages/Expense";
 import Categories from "./Pages/Categories";
 import Budgets from "./Pages/Budgets";
-import AIAdvisor from "./Pages/AiAdvisor";
+import AIAdvisor from "./Pages/AIAdvisor";
 import Reports from "./Pages/Reports";
 import AIChat from "./Pages/AI-Chat";
 import Settings from "./Pages/Setting";
