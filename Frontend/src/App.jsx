@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
 import LandingPage from "./Pages/LandingPage";
-import DashBoard from "./Pages/DashBoard";
+import DashBoard from "./Pages/Dashboard";
 import Setting from "./Pages/Setting";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
