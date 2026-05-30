@@ -2,7 +2,6 @@ import Income from "../Models/Income.js";
 import Expense from "../Models/Expense.js";
 
 export const getDashboardCards = async (req, res) => {
-  const month = Number(req.query.month);
   try {
     const userId = req.user._id;
 
@@ -17,28 +16,21 @@ export const getDashboardCards = async (req, res) => {
     const currentYear = new Date().getFullYear();
 
     // CURRENT MONTH
-    const startOfCurrentMonth = new Date(
-      currentYear,
-      month ? parseInt(month) : new Date().getMonth(),
-      1,
-    );
+    const startOfCurrentMonth = new Date(currentYear, selectedMonth, 1);
 
-    const endOfCurrentMonth = new Date(
-      currentYear,
-      month ? parseInt(month) : new Date().getMonth() + 1,
-      0,
-    );
+    const endOfCurrentMonth = new Date(currentYear, selectedMonth + 1, 0);
 
     // PREVIOUS MONTH
+    const previousMonthDate = new Date(currentYear, selectedMonth - 1, 1);
     const startOfPreviousMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - 1,
+      previousMonthDate.getFullYear(),
+      previousMonthDate.getMonth(),
       1,
     );
 
     const endOfPreviousMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
+      previousMonthDate.getFullYear(),
+      previousMonthDate.getMonth() + 1,
       0,
     );
 
