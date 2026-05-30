@@ -87,25 +87,19 @@ Return response in EXACT format:
       contents: prompt,
     });
 
-    // console.log("RAW AI RESPONSE:");
+    //
 
-    // console.log(response.text);
+    //
 
     const cleanedText = response.text
       .replace(/```json/g, "")
       .replace(/```/g, "")
       .trim();
 
-    console.log("CLEANED RESPONSE:");
-
-    console.log(cleanedText);
-
     try {
       return JSON.parse(cleanedText);
     } catch (parseError) {
-      console.log("JSON Parse Error:");
-
-      // console.log(parseError);
+      //
 
       return {
         executiveSummary: cleanedText,
@@ -120,10 +114,6 @@ Return response in EXACT format:
       };
     }
   } catch (error) {
-    console.log("AI ERROR:");
-
-    console.log(error);
-
     return {
       executiveSummary: "Unable to generate insights.",
 
@@ -176,8 +166,6 @@ IMPORTANT:
 
     return response.text;
   } catch (error) {
-    console.log(error);
-
     return "Unable to generate response right now.";
   }
 };
@@ -243,8 +231,6 @@ Return ONLY valid JSON.
 
     return JSON.parse(cleaned);
   } catch (error) {
-    console.log(error);
-
     return {
       executiveSummary: "Unable to generate AI report.",
 

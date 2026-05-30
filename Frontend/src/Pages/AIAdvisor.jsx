@@ -24,11 +24,10 @@ function AIAdvisor() {
     try {
       const response = await axiosInstance.get("/ai/insights");
 
-      // console.log("AI insights received:", response.data);
+      //
 
       setAiData(response.data);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

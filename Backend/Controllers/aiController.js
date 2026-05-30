@@ -101,7 +101,7 @@ export const getAIInsights = async (req, res) => {
     });
 
     res.status(200).json(aiInsights);
-    // console.log(aiInsights);
+    //
   } catch (error) {
     res.status(500).json({
       message: error.message,

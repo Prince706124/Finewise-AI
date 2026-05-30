@@ -66,7 +66,7 @@ export const getReportSummary = async (req, res) => {
       topCategoryAmount,
     });
 
-    // console.log("AI Report:", aiReport);
+    //
 
     // RESPONSE
     res.status(200).json({
@@ -80,7 +80,6 @@ export const getReportSummary = async (req, res) => {
       aiReport,
     });
   } catch (error) {
-    console.log("Error in getReportSummary:", error);
     res.status(500).json({
       message: error.message,
     });

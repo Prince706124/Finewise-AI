@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/auth/login", formData);
-      console.log(response.data);
+
       alert("Login successful!");
       navigate("/dashboard");
     } catch (error) {

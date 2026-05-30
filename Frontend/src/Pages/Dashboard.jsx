@@ -24,7 +24,7 @@ function DashBoard() {
       const response = await axiosInstance.get(
         `/dashboard/cards?month=${selectedMonth}`,
       );
-      console.log("Cards response:", response.data);
+
       setCards(response.data);
     } catch (error) {
       console.error("Error fetching cards:", error);

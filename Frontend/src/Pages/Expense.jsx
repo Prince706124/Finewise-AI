@@ -17,9 +17,7 @@ function Expense() {
       const response = await axiosInstance.get("/categories");
 
       setCategories(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchCategories();
@@ -59,7 +57,6 @@ function Expense() {
         amount: Number(formData.amount),
       });
 
-      console.log(response.data);
       toast.success("Expense added successfully!", {
         position: "top-center",
         autoClose: 2000,
@@ -82,7 +79,6 @@ function Expense() {
       // Refresh expenses list
       fetchExpenses();
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.message || "Failed to add expense!");
     }
   };
@@ -93,13 +89,9 @@ function Expense() {
         withCredentials: true,
       });
 
-      console.log(response.data);
-
       // Remove deleted expense from UI
       setExpenses(expenses.filter((expense) => expense._id !== id));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const [expenses, setExpenses] = useState([]);
@@ -107,9 +99,7 @@ function Expense() {
     try {
       const response = await axiosInstance.get("/expenses");
       setExpenses(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchExpenses();

@@ -15,10 +15,8 @@ function Reports() {
       const response = await axiosInstance.get("/reports/summary");
 
       setReport(response.data);
-      // console.log("Report Summary:", response.data);
-    } catch (error) {
-      console.log(error);
-    }
+      //
+    } catch (error) {}
   };
 
   useEffect(() => {

@@ -25,9 +25,7 @@ function Budgets() {
       const response = await axiosInstance.get("/categories");
 
       setCategories(response.data.filter((item) => item.type === "Expense"));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const handleChange = (e) => {
     setFormData({
@@ -51,9 +49,7 @@ function Budgets() {
 
         month: "May",
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchBudgets();
@@ -73,9 +69,7 @@ function Budgets() {
 
         remainingBudget: response.data.remainingBudget,
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchBudgets();

@@ -25,11 +25,9 @@ function Income() {
       const response = await axiosInstance.get("/income", {
         withCredentials: true,
       });
-      console.log(response.data);
+
       setIncomes(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   // RUN ON COMPONENT LOAD
   useEffect(() => {
@@ -53,8 +51,6 @@ function Income() {
         withCredentials: true,
       });
 
-      console.log(response.data);
-
       toast.success("Income added successfully!");
 
       // REFRESH UI
@@ -69,12 +65,9 @@ function Income() {
         notes: "",
       });
     } catch (error) {
-      console.log(error);
       toast.error("Failed to add income");
     }
   };
-
-  console.log(incomes);
 
   // TOTAL INCOME
   const totalIncome = incomes.reduce(
@@ -109,8 +102,6 @@ function Income() {
       // Update UI instantly
       setIncomes(incomes.filter((income) => income._id !== id));
     } catch (error) {
-      console.log(error);
-
       toast.error("Failed to delete income");
     }
   };

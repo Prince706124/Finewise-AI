@@ -56,9 +56,7 @@ function Categories() {
       const response = await axiosInstance.get("/categories");
 
       setCategories(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchCategories();
@@ -99,18 +97,14 @@ function Categories() {
 
         icon: "FaMoneyBillWave",
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const deleteCategory = async (id) => {
     try {
       await axiosInstance.delete(`/categories/${id}`);
 
       fetchCategories();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const handleEdit = (category) => {
     setEditingId(category._id);

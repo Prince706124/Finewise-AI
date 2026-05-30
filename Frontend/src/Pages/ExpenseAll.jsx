@@ -11,9 +11,7 @@ const ExpenseAll = () => {
       });
 
       setExpenses(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

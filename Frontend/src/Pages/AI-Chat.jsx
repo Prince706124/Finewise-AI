@@ -70,8 +70,6 @@ function AIChat() {
 
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
-      console.log(error);
-
       setMessages((prev) => [
         ...prev,
         {

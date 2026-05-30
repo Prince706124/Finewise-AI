@@ -58,7 +58,6 @@ function Settings() {
         monthlyReminder: user.monthlyReminder ?? true,
       });
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -94,7 +93,6 @@ function Settings() {
 
       localStorage.setItem("darkMode", formData.darkMode);
     } catch (error) {
-      console.log(error);
     } finally {
       setSaving(false);
     }
@@ -135,7 +133,6 @@ function Settings() {
         confirmPassword: "",
       });
     } catch (error) {
-      console.log(error);
       alert(error.response.data.message);
     } finally {
       setPasswordLoading(false);

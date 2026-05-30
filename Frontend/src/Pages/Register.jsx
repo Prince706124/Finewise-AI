@@ -18,7 +18,7 @@ function Register() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/auth/register", formData);
-      console.log(response.data);
+
       alert("Registration successful!");
       navigate("/dashboard");
     } catch (error) {

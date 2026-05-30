@@ -35,9 +35,7 @@ function Topbar({ title, setIsOpen, setSelectedMonth, selectedMonth }) {
       const response = await axiosInstance.get("/auth/me");
 
       setUser(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -67,9 +65,7 @@ function Topbar({ title, setIsOpen, setSelectedMonth, selectedMonth }) {
       localStorage.removeItem("darkMode");
 
       navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   // USER INFO
