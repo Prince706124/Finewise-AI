@@ -124,15 +124,15 @@ export const getDashboardCards = async (req, res) => {
 
     // FINAL RESPONSE
     res.status(200).json({
-      totalBalance,
+      totalBalance: currentSavings,
 
-      totalIncome,
+      totalIncome: currentIncomeTotal,
       incomeGrowth,
 
-      totalExpense,
+      totalExpense: currentExpenseTotal,
       expenseGrowth,
 
-      totalSavings: totalBalance,
+      totalSavings: currentSavings,
 
       savingsGrowth,
     });
