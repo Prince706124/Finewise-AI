@@ -2,11 +2,18 @@ import Income from "../Models/Income.js";
 import Expense from "../Models/Expense.js";
 
 export const getDashboardCards = async (req, res) => {
-  const month = req.query.month;
+  const month = Number(req.query.month);
   try {
     const userId = req.user._id;
 
     // CURRENT DATE
+    const currentDate = new Date();
+
+    const selectedMonth =
+      req.query.month !== undefined
+        ? Number(req.query.month)
+        : currentDate.getMonth();
+
     const currentYear = new Date().getFullYear();
 
     // CURRENT MONTH
