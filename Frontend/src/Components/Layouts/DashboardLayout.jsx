@@ -5,7 +5,7 @@ import MobileMenu from "./MobileMenu";
 import { useNavigate } from "react-router";
 import axiosInstance from "../../api/axiosInstance";
 import { useEffect } from "react";
-function DashboardLayout({ title, children }) {
+function DashboardLayout({ title, children, selectedMonth, setSelectedMonth }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +36,12 @@ function DashboardLayout({ title, children }) {
         <Sidebar></Sidebar>
         <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen}></MobileMenu>
         <main className="lg:ml-[250px] h-screen overflow-y-auto p-4 sm:p-6 lg:p-8 ">
-          <Topbar title={title} setIsOpen={setIsOpen}></Topbar>
+          <Topbar
+            title={title}
+            selectedMonth={selectedMonth}
+            setSelectedMonth={setSelectedMonth}
+            setIsOpen={setIsOpen}
+          ></Topbar>
           {children}
         </main>
       </div>

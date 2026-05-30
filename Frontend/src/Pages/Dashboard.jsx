@@ -16,10 +16,13 @@ function DashBoard() {
   const [categories, setCategories] = useState([]);
 
   const [trends, setTrends] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
 
   // FETCH CARDS
   const fetchCards = async () => {
-    const response = await axiosInstance.get("/dashboard/cards");
+    const response = await axiosInstance.get(
+      `/dashboard/cards?month=${selectedMonth}`,
+    );
 
     setCards(response.data);
   };
@@ -53,10 +56,14 @@ function DashBoard() {
     fetchCategories();
 
     fetchTrends();
-  }, []);
+  }, [selectedMonth]);
   return (
     <>
-      <DashboardLayout title={"Dashboard"}>
+      <DashboardLayout
+        title={"Dashboard"}
+        selectedMonth={selectedMonth}
+        setSelectedMonth={setSelectedMonth}
+      >
         <SummarCards summary={cards}></SummarCards>
 
         <div className="grid lg:grid-cols-12 gap-6 mb-6">

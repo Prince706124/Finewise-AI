@@ -7,6 +7,20 @@ import axiosInstance from "../../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 function Topbar({ title, setIsOpen }) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
@@ -115,6 +129,19 @@ function Topbar({ title, setIsOpen }) {
         >
           {title}
         </h2>
+        {title === "Dashboard" && (
+          <select
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(Number(e.target.value))}
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#5b3df5]"
+          >
+            {months.map((month, index) => (
+              <option key={index} value={index}>
+                {month}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
 
       {/* RIGHT */}
