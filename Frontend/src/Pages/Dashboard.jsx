@@ -20,32 +20,51 @@ function DashBoard() {
 
   // FETCH CARDS
   const fetchCards = async () => {
-    const response = await axiosInstance.get(
-      `/dashboard/cards?month=${selectedMonth}`,
-    );
-
-    setCards(response.data);
+    try {
+      const response = await axiosInstance.get(
+        `/dashboard/cards?month=${selectedMonth}`,
+      );
+      console.log("Cards response:", response.data);
+      setCards(response.data);
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+      setCards(null);
+    }
   };
 
   // FETCH TRANSACTIONS
   const fetchTransactions = async () => {
-    const response = await axiosInstance.get("/dashboard/recent-transactions");
-
-    setTransactions(response.data);
+    try {
+      const response = await axiosInstance.get(
+        "/dashboard/recent-transactions",
+      );
+      setTransactions(response.data);
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+      setTransactions([]);
+    }
   };
 
   // FETCH CHART
   const fetchCategories = async () => {
-    const response = await axiosInstance.get("/dashboard/expense-categories");
-
-    setCategories(response.data);
+    try {
+      const response = await axiosInstance.get("/dashboard/expense-categories");
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      setCategories([]);
+    }
   };
 
   // FETCH TRENDS
   const fetchTrends = async () => {
-    const response = await axiosInstance.get("/dashboard/monthly-trends");
-
-    setTrends(response.data);
+    try {
+      const response = await axiosInstance.get("/dashboard/monthly-trends");
+      setTrends(response.data);
+    } catch (error) {
+      console.error("Error fetching trends:", error);
+      setTrends([]);
+    }
   };
 
   useEffect(() => {

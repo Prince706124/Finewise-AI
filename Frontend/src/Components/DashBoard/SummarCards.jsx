@@ -6,7 +6,19 @@ import { FaPiggyBank } from "react-icons/fa";
 
 function SummarCards({ summary }) {
   if (!summary) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-center text-gray-500 py-10">
+        Loading dashboard data...
+      </div>
+    );
+  }
+
+  if (!summary.totalBalance && summary.totalBalance !== 0) {
+    return (
+      <div className="text-center text-red-500 py-10">
+        Error loading summary data
+      </div>
+    );
   }
   const cards = [
     {
@@ -61,10 +73,7 @@ function SummarCards({ summary }) {
           >
             <div className="flex items-center justify-between mb-5">
               <div>
-                <p
-                  className="text-sm ttext-gray-500
-dark:text-gray-400 mb-2"
-                >
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                   {item.title}
                 </p>
                 <h3
