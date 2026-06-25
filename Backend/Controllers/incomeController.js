@@ -1,4 +1,5 @@
 import Income from "../Models/Income.js";
+import redisClient from "../Config/redis.js";
 
 // Create a new income entry
 export const addIncome = async (req, res) => {
@@ -14,6 +15,9 @@ export const addIncome = async (req, res) => {
       user: req.user._id,
     });
 
+    const month = new Date(date).getMonth();
+    await redisClient.del(`dashboard:${req.user._id}:${month}`);
+
     res.status(201).json(income);
   } catch (error) {
     res.status(500).json({
@@ -25,9 +29,16 @@ export const addIncome = async (req, res) => {
 // Get all income entries for the logged-in user
 export const getIncomes = async (req, res) => {
   try {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 20;
+
     const incomes = await Income.find({
       user: req.user._id,
-    }).sort({ date: -1 });
+    })
+      .sort({ date: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .lean(); // Use lean() for better performance
 
     res.status(200).json(incomes);
   } catch (error) {
@@ -94,6 +105,9 @@ export const updateIncome = async (req, res) => {
     income.notes = notes;
 
     await income.save();
+
+    const month = new Date(updatedIncome.date).getMonth();
+    await redisClient.del(`dashboard:${req.user._id}:${month}`);
 
     res.status(200).json(income);
   } catch (error) {

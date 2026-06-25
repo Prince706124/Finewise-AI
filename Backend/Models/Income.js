@@ -39,4 +39,9 @@ const incomeSchema = new mongoose.Schema(
 
 const Income = mongoose.models.Income || mongoose.model("Income", incomeSchema);
 
+incomeSchema.index({
+  user: 1,
+  date: -1,
+});
+
 export default Income;

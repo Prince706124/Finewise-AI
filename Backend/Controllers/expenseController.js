@@ -1,4 +1,5 @@
 import Expense from "../Models/Expense.js";
+import redisClient from "../Config/redis.js";
 
 // ADD EXPENSE
 export const addExpense = async (req, res) => {
@@ -16,6 +17,9 @@ export const addExpense = async (req, res) => {
       user: req.user._id,
     });
 
+    const month = new Date(date).getMonth();
+    await redisClient.del(`dashboard:${req.user._id}:${month}`);
+
     res.status(201).json(expense);
   } catch (error) {
     res.status(500).json({
@@ -26,9 +30,16 @@ export const addExpense = async (req, res) => {
 
 export const getExpenses = async (req, res) => {
   try {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 20;
+
     const expenses = await Expense.find({
       user: req.user._id,
-    }).sort({ date: -1 });
+    })
+      .sort({ date: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .lean(); // Use lean() for better performance
 
     res.status(200).json(expenses);
   } catch (error) {

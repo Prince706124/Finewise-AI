@@ -1,8 +1,10 @@
 import Income from "../Models/Income.js";
 import Expense from "../Models/Expense.js";
+import redisClient from "../Config/redis.js";
 
 export const getDashboardCards = async (req, res) => {
   try {
+    const apiStart = Date.now();
     const userId = req.user._id;
 
     // CURRENT DATE
@@ -12,6 +14,16 @@ export const getDashboardCards = async (req, res) => {
       req.query.month !== undefined
         ? Number(req.query.month)
         : currentDate.getMonth();
+    const cacheKey = `dashboard:${userId}:${selectedMonth}`;
+
+    // CHECK CACHE
+    const cachedData = await redisClient.get(cacheKey);
+
+    if (cachedData) {
+      console.log("Cache Hit");
+
+      return res.status(200).json(JSON.parse(cachedData));
+    }
 
     const currentYear = new Date().getFullYear();
 
@@ -34,69 +46,111 @@ export const getDashboardCards = async (req, res) => {
       0,
     );
 
-    // FETCH DATA
-    const incomes = await Income.find({
-      user: userId,
-    });
+    const incomeStats = await Income.aggregate([
+      {
+        $match: {
+          user: userId,
+        },
+      },
+      {
+        $group: {
+          _id: null,
 
-    const expenses = await Expense.find({
-      user: userId,
-    });
+          totalIncome: {
+            $sum: "$amount",
+          },
 
-    // TOTALS
-    const totalIncome = incomes.reduce((acc, item) => acc + item.amount, 0);
+          currentIncomeTotal: {
+            $sum: {
+              $cond: [
+                {
+                  $and: [
+                    { $gte: ["$date", startOfCurrentMonth] },
+                    { $lte: ["$date", endOfCurrentMonth] },
+                  ],
+                },
+                "$amount",
+                0,
+              ],
+            },
+          },
 
-    const totalExpense = expenses.reduce((acc, item) => acc + item.amount, 0);
+          previousIncomeTotal: {
+            $sum: {
+              $cond: [
+                {
+                  $and: [
+                    { $gte: ["$date", startOfPreviousMonth] },
+                    { $lte: ["$date", endOfPreviousMonth] },
+                  ],
+                },
+                "$amount",
+                0,
+              ],
+            },
+          },
+        },
+      },
+    ]);
 
-    const totalBalance = totalIncome - totalExpense;
+    const {
+      totalIncome = 0,
+      currentIncomeTotal = 0,
+      previousIncomeTotal = 0,
+    } = incomeStats[0] || {};
 
-    // CURRENT MONTH
-    const currentMonthIncome = incomes.filter((item) => {
-      const date = new Date(item.date);
+    const expenseStats = await Expense.aggregate([
+      {
+        $match: {
+          user: userId,
+        },
+      },
+      {
+        $group: {
+          _id: null,
 
-      return date >= startOfCurrentMonth && date <= endOfCurrentMonth;
-    });
+          totalExpense: {
+            $sum: "$amount",
+          },
 
-    const currentMonthExpense = expenses.filter((item) => {
-      const date = new Date(item.date);
+          currentExpenseTotal: {
+            $sum: {
+              $cond: [
+                {
+                  $and: [
+                    { $gte: ["$date", startOfCurrentMonth] },
+                    { $lte: ["$date", endOfCurrentMonth] },
+                  ],
+                },
+                "$amount",
+                0,
+              ],
+            },
+          },
 
-      return date >= startOfCurrentMonth && date <= endOfCurrentMonth;
-    });
+          previousExpenseTotal: {
+            $sum: {
+              $cond: [
+                {
+                  $and: [
+                    { $gte: ["$date", startOfPreviousMonth] },
+                    { $lte: ["$date", endOfPreviousMonth] },
+                  ],
+                },
+                "$amount",
+                0,
+              ],
+            },
+          },
+        },
+      },
+    ]);
 
-    // PREVIOUS MONTH
-    const previousMonthIncome = incomes.filter((item) => {
-      const date = new Date(item.date);
-
-      return date >= startOfPreviousMonth && date <= endOfPreviousMonth;
-    });
-
-    const previousMonthExpense = expenses.filter((item) => {
-      const date = new Date(item.date);
-
-      return date >= startOfPreviousMonth && date <= endOfPreviousMonth;
-    });
-
-    // CURRENT TOTALS
-    const currentIncomeTotal = currentMonthIncome.reduce(
-      (acc, item) => acc + item.amount,
-      0,
-    );
-
-    const currentExpenseTotal = currentMonthExpense.reduce(
-      (acc, item) => acc + item.amount,
-      0,
-    );
-
-    // PREVIOUS TOTALS
-    const previousIncomeTotal = previousMonthIncome.reduce(
-      (acc, item) => acc + item.amount,
-      0,
-    );
-
-    const previousExpenseTotal = previousMonthExpense.reduce(
-      (acc, item) => acc + item.amount,
-      0,
-    );
+    const {
+      totalExpense = 0,
+      currentExpenseTotal = 0,
+      previousExpenseTotal = 0,
+    } = expenseStats[0] || {};
 
     // SAVINGS
     const currentSavings = currentIncomeTotal - currentExpenseTotal;
@@ -123,7 +177,7 @@ export const getDashboardCards = async (req, res) => {
     const savingsGrowth = calculateGrowth(currentSavings, previousSavings);
 
     // FINAL RESPONSE
-    res.status(200).json({
+    const response = {
       totalBalance: currentSavings,
 
       totalIncome: currentIncomeTotal,
@@ -133,9 +187,12 @@ export const getDashboardCards = async (req, res) => {
       expenseGrowth,
 
       totalSavings: currentSavings,
-
       savingsGrowth,
-    });
+    };
+
+    await redisClient.setEx(cacheKey, 60, JSON.stringify(response));
+    console.log("Total API:", Date.now() - apiStart);
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({
       message: error.message,

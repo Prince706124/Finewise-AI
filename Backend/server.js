@@ -2,6 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import "./Config/redis.js";
+import compression from "compression";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 
 import connectDB from "./Config/db.js";
 import authRoutes from "./Routes/authRoutes.js";
@@ -28,6 +32,17 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
+  }),
+);
+
+app.use(helmet());
+
+app.use(compression());
+
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
   }),
 );
 
