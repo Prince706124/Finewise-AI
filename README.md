@@ -1,275 +1,229 @@
 # FinWise AI
 
-AI-Powered Personal Finance Management Platform
+> **AI-Powered Personal Finance Management Platform**
 
-FinWise AI is a full-stack personal finance management application that enables users to track income, manage expenses, create budgets, analyze spending patterns, and receive AI-generated financial insights. The platform combines financial analytics with conversational AI to help users make informed financial decisions.
-
----
-
-## Live Demo
-
-Frontend: (https://finewise-ai.vercel.app)
-
-Backend API: https://finewise-ai.onrender.com
----
-
-## Overview
-
-FinWise AI provides a centralized dashboard for managing personal finances. Users can monitor their financial activity, set budget limits, visualize spending trends, and interact with an AI assistant that offers personalized recommendations based on their financial data.
+FinWise AI is a production-ready full-stack personal finance management platform that enables users to manage income, expenses, budgets, and financial reports while receiving AI-powered financial insights. The application is optimized for scalability using MongoDB Aggregation Pipelines, Redis caching, database indexing, and concurrent query execution.
 
 ---
 
-## Features
+# Live Demo
 
-### Authentication & Security
+**Frontend:** https://finewise-ai.vercel.app
 
-* User Registration and Login
-* JWT Authentication
+**Backend API:** https://finewise-ai.onrender.com
+
+---
+
+# Key Highlights
+
+* AI-powered financial assistant using Google Gemini
+* JWT cookie-based authentication
+* MongoDB Aggregation Pipelines
+* Redis Cache (Cache-Aside Pattern)
+* Compound Database Indexing
+* Server-side Pagination
+* Lean Queries & Field Projection
+* Parallel Database Queries using Promise.all
+* Helmet Security Middleware
+* Response Compression
+* API Rate Limiting
+* Dockerized Redis
+* Performance Benchmarking with Autocannon
+
+---
+
+# Features
+
+## Authentication
+
+* User Registration & Login
+* JWT Cookie Authentication
 * Protected Routes
-* Password Management
-* Secure API Access
+* Secure Password Hashing
+* Authorization Middleware
 
-### Financial Management
+---
 
-* Add, Edit, and Delete Income Records
-* Add, Edit, and Delete Expense Records
-* Real-Time Balance Calculation
-* Transaction History Tracking
-* Category-Based Expense Organization
+## Income & Expense Management
 
-### Categories
+* Create, Update and Delete Income
+* Create, Update and Delete Expenses
+* Transaction History
+* Category Management
+* Monthly Financial Tracking
 
-* Create Custom Categories
-* Edit Categories
-* Delete Categories
-* Icon-Based Category Support
+---
 
-### Budget Management
+## Budget Management
 
-* Monthly Budget Planning
-* Category-Wise Budget Limits
-* Budget Utilization Tracking
-* Overspending Detection
-* Remaining Budget Monitoring
+* Monthly Budgets
+* Category-wise Budget Limits
+* Overspending Alerts
+* Savings Tracking
 
-### Dashboard Analytics
+---
 
-* Income Overview
-* Expense Overview
-* Savings Calculation
+## Analytics Dashboard
+
+* Monthly Income
+* Monthly Expenses
+* Savings Analysis
+* Growth Statistics
 * Expense Distribution Charts
 * Recent Transactions
-* Category-Based Analytics
-
-### Reports
-
-* Monthly Financial Summary
-* Savings Analysis
-* Spending Insights
-* Category-Wise Breakdown
-* AI-Generated Financial Observations
-
-### AI Advisor
-
-* Spending Analysis
-* Savings Recommendations
-* Budget Evaluation
-* Financial Health Assessment
-
-### AI Financial Chat
-
-* Interactive Financial Assistant
-* Personalized Financial Guidance
-* Budgeting Advice
-* Spending Optimization Suggestions
-
-### User Preferences
-
-* Dark Mode Support
-* Savings Goals
-* Income Targets
-* Currency Preferences
-* Notification Settings
+* Category Analytics
 
 ---
 
-## Screenshots
+## AI Features
 
-### Login Page
-
-<img src="./screenshots/LoginPage.png" width="900"/>
-
-### Dashboard
-
-<img src="./screenshots/Dashboard.png" width="900"/>
-
-### Income Management
-
-<img src="./screenshots/Income.png" width="900"/>
-
-### Expense Management
-
-<img src="./screenshots/Expnese.png" width="900"/>
-
-### Budget Planner
-
-<img src="./screenshots/Budgets.png" width="900"/>
-
-### Reports
-
-<img src="./screenshots/Reports.png" width="900"/>
-
-### AI Advisor
-
-<img src="./screenshots/AIAdvisor.png" width="900"/>
-
-### AI Financial Chat
-
-<img src="./screenshots/AIchat.png" width="900"/>
-
-### Settings
-
-<img src="./screenshots/Settings.png" width="900"/>
+* AI Financial Advisor
+* Personalized Spending Analysis
+* Budget Recommendations
+* Financial Health Insights
+* Conversational AI Chat
 
 ---
 
-## Technology Stack
+# Backend Optimizations
 
-### Frontend
+## Database
+
+* Compound Indexes for frequently queried collections
+* MongoDB Aggregation Pipelines for dashboard analytics
+* Lean Queries to reduce memory overhead
+* Field Projection to minimize data transfer
+* Promise.all for concurrent database execution
+
+---
+
+## Performance
+
+* Redis Cache (Cache-Aside Strategy)
+* Cache Invalidation on Income/Expense Updates
+* Response Compression
+* Performance Profiling
+* Load Testing using Autocannon
+
+### Performance Improvements
+
+| API       | Before  | After   |
+| --------- | ------- | ------- |
+| Dashboard | ~819 ms | ~114 ms |
+| Income    | ~450 ms | ~115 ms |
+| Expense   | ~450 ms | ~110 ms |
+
+Dashboard latency was reduced by approximately **86%** after applying indexing, aggregation pipelines, concurrent execution, lean queries and Redis caching.
+
+---
+
+## Security
+
+* Helmet Security Headers
+* API Rate Limiting
+* JWT Cookie Authentication
+* Password Hashing with bcrypt
+
+---
+
+# Screenshots
+
+*(Keep your existing screenshots section here.)*
+
+---
+
+# Tech Stack
+
+## Frontend
 
 * React.js
 * Vite
 * Tailwind CSS
+* Axios
 * Recharts
 * React Router DOM
-* Axios
 * React Icons
 
-### Backend
+---
+
+## Backend
 
 * Node.js
 * Express.js
-* MongoDB
+* MongoDB Atlas
 * Mongoose
-* JWT Authentication
-* bcrypt.js
+* Redis
+* JWT
+* bcrypt
+* Helmet
+* Compression
+* Express Rate Limit
 
-### AI Integration
+---
+
+## AI
 
 * Google Gemini API
 
-### Deployment
+---
 
-* Frontend: Vercel
-* Backend: Render
-* Database: MongoDB Atlas
+## DevOps
+
+* Docker
+* Render
+* Vercel
 
 ---
 
-## Architecture
+# Architecture
 
 ```text
-Frontend (React + Vite)
-          │
-          ▼
-Backend (Node.js + Express)
-          │
-          ▼
-MongoDB Atlas
-          │
-          ▼
-Google Gemini API
+                    React + Vite
+                          │
+                          ▼
+               Express.js + Node.js
+                          │
+          ┌───────────────┴───────────────┐
+          ▼                               ▼
+      Redis Cache                 MongoDB Atlas
+(Cache Aside Pattern)                  │
+          │                            │
+          └──────────────┬─────────────┘
+                         ▼
+                Aggregation Pipeline
+                         │
+                         ▼
+                  JSON API Response
+                         │
+                         ▼
+                 Google Gemini API
 ```
 
 ---
 
-## Project Structure
+# Performance Optimizations
 
-```text
-FineWise-AI
-│
-├── Frontend
-│   ├── src
-│   │   ├── Components
-│   │   ├── Pages
-│   │   ├── Context
-│   │   ├── Routes
-│   │   ├── Utils
-│   │   └── api
-│
-├── Backend
-│   ├── Controllers
-│   ├── Models
-│   ├── Routes
-│   ├── Middleware
-│   ├── Services
-│   ├── Config
-│   └── server.js
-│
-└── README.md
-```
+* Compound MongoDB Indexes
+* Aggregation Pipelines
+* Promise.all
+* Lean Queries
+* Field Projection
+* Server-side Pagination
+* Redis Cache
+* Cache Invalidation
+* Response Compression
+* Helmet Security
+* API Rate Limiting
 
 ---
 
-## Installation
+# Installation
 
-### Clone Repository
-
-```bash
-git clone https://github.com/yourusername/FinWise-AI.git
-
-cd FinWise-AI
-```
-
-### Backend Setup
-
-```bash
-cd Backend
-
-npm install
-```
-
-Create a `.env` file:
-
-```env
-PORT=5000
-
-MONGO_URL=your_mongodb_connection_string
-
-JWT_SECRET=your_jwt_secret
-
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-Start Backend:
-
-```bash
-npm run dev
-```
-
-### Frontend Setup
-
-```bash
-cd Frontend
-
-npm install
-```
-
-Create a `.env` file:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-Start Frontend:
-
-```bash
-npm run dev
-```
+*(Keep your installation section.)*
 
 ---
 
-## Environment Variables
+# Environment Variables
 
 ### Backend
 
@@ -277,7 +231,10 @@ npm run dev
 PORT=
 MONGO_URL=
 JWT_SECRET=
+REDIS_URL=
 GEMINI_API_KEY=
+FRONTEND_URL=
+NODE_ENV=
 ```
 
 ### Frontend
@@ -288,20 +245,30 @@ VITE_API_URL=
 
 ---
 
-## Future Enhancements
+# Deployment
 
-* PDF Report Export
-* Email Financial Reports
-* Receipt OCR Scanner
+Frontend: **Vercel**
+
+Backend: **Render**
+
+Database: **MongoDB Atlas**
+
+Cache: **Render Key Value (Redis)**
+
+---
+
+# Future Enhancements
+
+* OCR Receipt Scanner
 * Recurring Transactions
-* Voice-Based Financial Assistant
 * Predictive Expense Forecasting
-* AI Budget Forecasting
+* PDF Financial Reports
+* Email Reports
 * Multi-Currency Support
 
 ---
 
-## Author
+# Author
 
 Prince Raj
 
@@ -309,12 +276,6 @@ B.Tech, IIT Kharagpur
 
 ---
 
-## License
+# License
 
 This project is intended for educational and portfolio purposes.
-
----
-
-## Support
-
-If you found this project useful, consider giving it a star on GitHub.
